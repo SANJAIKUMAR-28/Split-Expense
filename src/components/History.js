@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "../css/transaction-history.css";
 
-
-
-
-const History = ({ user, fetchSummary }) => {
+const History = ({ user }) => {
     const [transactions, setTransactions] = useState([]);
 
     const fetchAllTransactions = useCallback(async () => {

@@ -222,7 +222,7 @@ const Dashboard = () => {
 
                 {activeTab === "transactions" && <Transactions user={user} fetchSummary={fetchSummary} />}
 
-                {activeTab === "history" && <History user={user} fetchSummary={fetchSummary} />}
+                {activeTab === "history" && <History user={user} />}
 
 
                 {showModal && (
