@@ -1,0 +1,83 @@
+
+.history-container {
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .history-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .history-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .history-card {
+    background: rgb(240, 239, 239);
+    margin-bottom: 12px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border-left: 5px solid #4f46e5;
+    transition: transform 0.2s;
+  }
+  
+  .history-card:hover {
+    transform: scale(1.02);
+  }
+  .txn-name{
+    display: flex;
+    justify-content: space-between;
+  }
+  .txn-desc {
+    margin-top: 2px;
+    font-style: italic;
+    color: #555;
+  }
+  
+  .txn-date {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 5px;
+  }
+
+  .owed-info {
+    display: flex;
+    justify-content:flex-end;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .owed-info-history{
+    display: flex;
+    justify-content:space-between;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .pdf-button {
+    margin: 1rem 0;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    margin-top: -20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .pdf-button:hover {
+    background-color: #45a049;
+    transform: scale(1.03);
+    transition: 
+    all 0.2s ease-in-out;
+  }
+
+  
+  
