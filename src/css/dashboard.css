@@ -91,25 +91,18 @@ html {
 
 .dashboard-buttons button {
     padding: 10px 20px;
-    width: 125px;
+    width: 150px;
     font-size: 16px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
 }
 
-.dashboard-buttons button:first-child {
+.dashboard-buttons button {
     background-color: #28a745;
     font-weight: bold;
     color: white;
 }
-
-.dashboard-buttons button:last-child {
-    background-color: #ffc107;
-    font-weight: bold;
-    color: rgb(26, 26, 26);
-}
-
 
 /* Line separator */
 .separator {

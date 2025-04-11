@@ -340,5 +340,5 @@ func SendSMS(w http.ResponseWriter, r *http.Request) {
 	defer resp.Body.Close()
 
 	bodyBytes, _ := ioutil.ReadAll(resp.Body)
-	w.Write(bodyBytes) // You can customize the success response
+	w.Write(bodyBytes)
 }

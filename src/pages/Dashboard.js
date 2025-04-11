@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { toast } from "react-toastify";
-import { faClockRotateLeft, faGear, faArrowRightFromBracket, faReceipt, faChartSimple } from '@fortawesome/free-solid-svg-icons';
+import { faClockRotateLeft, faUserGroup, faArrowRightFromBracket, faReceipt, faChartSimple } from '@fortawesome/free-solid-svg-icons';
 import Modal from "../components/Modal";
 import DashboardHistory from "../components/DashboardHistory";
 import Transactions from "../components/Transactions";
@@ -180,11 +180,11 @@ const Dashboard = () => {
                     <li className="sidebar-logo">
                         <img src={logo} alt="logo" />
                     </li>
-                    <li className={activeTab === "dashboard" ? "active" : ""} onClick={() => { setActiveTab("dashboard") }}><FontAwesomeIcon icon={faChartSimple} style={{marginRight:"8px",fontSize:"15px"}} />Dashboard</li>
-                    <li className={activeTab === "transactions" ? "active" : ""} onClick={() => { setActiveTab("transactions") }}><FontAwesomeIcon icon={faReceipt} style={{marginRight:"8px",fontSize:"15px"}} />Transactions</li>
-                    <li className={activeTab === "history" ? "active" : ""} onClick={() => { setActiveTab("history") }}><FontAwesomeIcon icon={faClockRotateLeft} style={{marginRight:"8px",fontSize:"15px"}} />History</li>
-                    <li className={activeTab === "settings" ? "active" : ""} onClick={() => { setActiveTab("settings") }}><FontAwesomeIcon icon={faGear} style={{marginRight:"8px",fontSize:"15px"}} />Settings</li>
-                    <li className={activeTab === "logout" ? "active" : ""} onClick={() => { setTimeout(() => navigate("/"), 1000); }}><FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginRight:"8px",fontSize:"15px"}} />Logout</li>
+                    <li className={activeTab === "dashboard" ? "active" : ""} onClick={() => { setActiveTab("dashboard") }}><FontAwesomeIcon icon={faChartSimple} style={{marginRight:"8px",fontSize:"15px"}} /> Dashboard</li>
+                    <li className={activeTab === "transactions" ? "active" : ""} onClick={() => { setActiveTab("transactions") }}><FontAwesomeIcon icon={faReceipt} style={{marginRight:"8px",fontSize:"15px"}} /> Transactions</li>
+                    <li className={activeTab === "history" ? "active" : ""} onClick={() => { setActiveTab("history") }}><FontAwesomeIcon icon={faClockRotateLeft} style={{marginRight:"8px",fontSize:"15px"}} /> History</li>
+                    <li className={activeTab === "friends" ? "active" : ""} onClick={() => { setActiveTab("friends") }}><FontAwesomeIcon icon={faUserGroup} style={{marginRight:"8px",fontSize:"15px"}} />Friends</li>
+                    <li className={activeTab === "logout" ? "active" : ""} onClick={() => { setTimeout(() => navigate("/"), 1000); }}><FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginRight:"8px",fontSize:"15px"}} /> Logout</li>
                 </ul>
             </div>
             <div className="dashboard">
@@ -192,9 +192,6 @@ const Dashboard = () => {
                     <h1>Welcome, {user.Name}!</h1>
                     <div className="dashboard-buttons">
                         <button onClick={() => setShowModal(true)}>Add a Bill</button>
-                        <button onClick={() => toast.info("Settle Bill page coming soon 🚧")}>
-                            Settle up
-                        </button>
                     </div>
                 </div>
 
