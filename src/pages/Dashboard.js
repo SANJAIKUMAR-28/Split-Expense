@@ -145,7 +145,7 @@ const Dashboard = () => {
                         person.totalAmount += Amount;
                         if(!IsSettled)
                         person.youAreOwed += Amount / 2;
-                        person.transactions.push({amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
+                        person.transactions.push({payer:true,amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
                     }
                     else if (PayerId !== user.Id) {
                             if (!friendsTxn.has(PayerName)) {
@@ -164,7 +164,7 @@ const Dashboard = () => {
                         person.totalAmount += Amount ;
                         if(!IsSettled)
                         person.youOwe += Amount / 2;
-                        person.transactions.push({ amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
+                        person.transactions.push({payer:false, amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
                     }
             }
             });
