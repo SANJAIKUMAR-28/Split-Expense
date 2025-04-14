@@ -1,0 +1,68 @@
+.grid-container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 30px;
+    justify-content: start; 
+  }
+  
+  .box {
+    height: auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: rgb(19, 10, 10);
+    padding: 20px;
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    justify-content: start;
+    border-radius: 10px;
+  }
+  
+  .user-header {
+    display: flex;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+  
+  .box-avatar {
+    width: 80px;
+    height: 80px;
+    font-weight: bold;
+    font-size: 40px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  
+  .user-details {
+    margin-top: 8px;
+    display: flex;
+    font-size: 14px;
+    gap: 8px;
+    flex-direction: column;  
+    transition: transform 0.5s;
+  }
+  
+  .box:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  .user-amount-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .user-amount {
+    margin-top: 8px;
+    display: flex;  
+    align-items: center;   
+    flex-direction: column; 
+    gap: 10px;
+  }
+  
+  

@@ -12,7 +12,7 @@ const DashboardHistory = ({ youOweList, youAreOwedList }) => {
             <div className="user-header">
               <div className="avatar">{user.name.charAt(0)}</div>
               <div className="user-info">
-                <p className="user-name">{user.name} <span style={{fontWeight:"lighter",fontSize:"12px"}}>({user.mobile})</span></p>
+                <p className="user-name">{user.name.toUpperCase()} <span style={{fontWeight:"lighter",fontSize:"12px"}}>({user.mobile})</span></p>
                 <p className="user-amount owed">You owe ₹{user.totalAmount}</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ const DashboardHistory = ({ youOweList, youAreOwedList }) => {
             <div className="user-header">
               <div className="avatar">{user.name.charAt(0)}</div>
               <div className="user-info">
-                <p className="user-name">{user.name} <span style={{fontWeight:"lighter",fontSize:"12px"}}>({user.mobile})</span></p>
+                <p className="user-name">{user.name.toUpperCase()} <span style={{fontWeight:"lighter",fontSize:"12px"}}>({user.mobile})</span></p>
                 <p className="user-amount owed-to-you">You are owed ₹{user.totalAmount}</p>
               </div>
             </div>

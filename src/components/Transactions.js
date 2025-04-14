@@ -80,13 +80,13 @@ const Transactions = ({ user, fetchSummary }) => {
                     {transactions.map((txn, idx) => (
                         <li onClick={() => handleCardClick(txn)} key={idx} className="history-card">
                             <div className="txn-name">
-                                <p><strong>{txn.PayerName}</strong> paid <strong>₹{txn.Amount}</strong> on Behalf of <strong>{txn.RecipientName}</strong></p>
+                                <p><strong>{txn.PayerName.toUpperCase()}</strong> paid <strong>₹{txn.Amount}</strong> on Behalf of <strong>{txn.RecipientName.toUpperCase()}</strong></p>
                                 {!(user.Mobile===txn.RecipientMobile) && (<BellWithTooltip number={txn.RecipientMobile} payer={txn.PayerName} amount={txn.Amount/2} desc={txn.Description}/>)}
                             </div>
                             <p className="txn-desc">For: {txn.Description}</p>
                             <p className="txn-date">{new Date(txn.CreatedAt).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}</p>
                             <div className="owed-info">
-                                <div><strong>{txn.RecipientName === user.Name ? "You" : txn.RecipientName} {txn.RecipientName === user.Name ? "owe" : "owes"}:</strong> ₹{txn.Amount / 2}</div>
+                                <div><strong>{txn.RecipientName === user.Name ? "You" : txn.RecipientName.toUpperCase()} {txn.RecipientName === user.Name ? "owe" : "owes"}:</strong> ₹{txn.Amount / 2}</div>
                             </div>
                         </li>
                     ))}

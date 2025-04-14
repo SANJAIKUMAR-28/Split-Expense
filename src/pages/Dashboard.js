@@ -7,6 +7,7 @@ import Modal from "../components/Modal";
 import DashboardHistory from "../components/DashboardHistory";
 import Transactions from "../components/Transactions";
 import History from "../components/History";
+import FriendsCard from "../components/FriendsCard";
 import logo from '../assets/logo.png';
 
 
@@ -20,6 +21,7 @@ const Dashboard = () => {
     const [expense, setExpense] = useState("");
     const [owe, setOwe] = useState("");
     const [owed, setOwed] = useState("");
+    const [friends, setFriends] = useState([]);
     const [showModal, setShowModal] = useState(false);
 
     const [amount, setAmount] = useState();
@@ -98,6 +100,80 @@ const Dashboard = () => {
         }
     }, [user, navigate]);
 
+    const fetchFriends = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/getTransaction/${user.Id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const data = await response.json();
+
+            const friendsTxn = new Map();
+
+            data.forEach((txn) => {
+                const {
+                    Amount,
+                    Description,
+                    PayerId,
+                    PayerName,
+                    PayerMobile,
+                    RecipientId,
+                    RecipientName,
+                    RecipientMobile,
+                    CreatedAt,
+                    IsSettled,
+                } = txn;
+
+                if (user.Id === PayerId || user.Id === RecipientId) {
+                    if ( RecipientId !== user.Id) {
+                        if (!friendsTxn.has(RecipientName)) {
+                            friendsTxn.set(RecipientName, {
+                                name: RecipientName,
+                                mobile: RecipientMobile,
+                                totalTransactions: 0,
+                                totalAmount: 0,
+                                youOwe: 0,
+                                youAreOwed: 0,
+                                transactions: [],
+                            });
+                        }
+                        const person = friendsTxn.get(RecipientName);
+                        person.totalTransactions += 1;
+                        person.totalAmount += Amount;
+                        if(!IsSettled)
+                        person.youAreOwed += Amount / 2;
+                        person.transactions.push({amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
+                    }
+                    else if (PayerId !== user.Id) {
+                            if (!friendsTxn.has(PayerName)) {
+                            friendsTxn.set(PayerName, {
+                                name: PayerName,
+                                mobile: PayerMobile,
+                                totalTransactions: 0,
+                                totalAmount: 0,
+                                youOwe: 0,
+                                youAreOwed: 0,
+                                transactions: [],
+                            });
+                        }
+                        const person = friendsTxn.get(PayerName);
+                        person.totalTransactions += 1;
+                        person.totalAmount += Amount ;
+                        if(!IsSettled)
+                        person.youOwe += Amount / 2;
+                        person.transactions.push({ amount: Amount, reason: Description, date: CreatedAt, IsSettled: IsSettled});
+                    }
+            }
+            });
+            setFriends(Array.from(friendsTxn.values()));
+        } catch (err) {
+            console.error("Error fetching transaction:", err);
+        }
+    }
+
 
     const fetchSummary = useCallback(async () => {
         try {
@@ -131,6 +207,11 @@ const Dashboard = () => {
             payer_mobile: user.Mobile,
             recipient_mobile: recipientMobile,
         };
+
+        if(user.Mobile === recipientMobile){
+            alert("You cannot send a bill to yourself");
+            return;
+        }
 
         try {
             const response = await fetch("http://localhost:8080/bills", {
@@ -183,7 +264,7 @@ const Dashboard = () => {
                     <li className={activeTab === "dashboard" ? "active" : ""} onClick={() => { setActiveTab("dashboard") }}><FontAwesomeIcon icon={faChartSimple} style={{marginRight:"8px",fontSize:"15px"}} /> Dashboard</li>
                     <li className={activeTab === "transactions" ? "active" : ""} onClick={() => { setActiveTab("transactions") }}><FontAwesomeIcon icon={faReceipt} style={{marginRight:"8px",fontSize:"15px"}} /> Transactions</li>
                     <li className={activeTab === "history" ? "active" : ""} onClick={() => { setActiveTab("history") }}><FontAwesomeIcon icon={faClockRotateLeft} style={{marginRight:"8px",fontSize:"15px"}} /> History</li>
-                    <li className={activeTab === "friends" ? "active" : ""} onClick={() => { setActiveTab("friends") }}><FontAwesomeIcon icon={faUserGroup} style={{marginRight:"8px",fontSize:"15px"}} />Friends</li>
+                    <li className={activeTab === "friends" ? "active" : ""} onClick={async () => { setActiveTab("friends"); await fetchFriends(); }}><FontAwesomeIcon icon={faUserGroup} style={{marginRight:"8px",fontSize:"15px"}} />Friends</li>
                     <li className={activeTab === "logout" ? "active" : ""} onClick={() => { setTimeout(() => navigate("/"), 1000); }}><FontAwesomeIcon icon={faArrowRightFromBracket} style={{marginRight:"8px",fontSize:"15px"}} /> Logout</li>
                 </ul>
             </div>
@@ -224,7 +305,7 @@ const Dashboard = () => {
 
                 {activeTab === "history" && <History user={user} />}
 
-
+                {activeTab === "friends" && <FriendsCard friends={friends} />}
                 {showModal && (
                     <Modal
                         amount={amount}
